@@ -1,0 +1,38 @@
+{
+  "name": "fullstack-leetcode",
+  "private": true,
+  "type": "module",
+  "description": "LeetCode-style practice bank for frontend, backend and full-stack interviews",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "new": "node scripts/fl.mjs new",
+    "t": "node scripts/fl.mjs test",
+    "play": "node scripts/fl.mjs play",
+    "log": "node scripts/fl.mjs log",
+    "reset": "node scripts/fl.mjs reset",
+    "today": "node scripts/fl.mjs today",
+    "sync": "node scripts/fl.mjs sync",
+    "test": "vitest run",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.7",
+    "@vitejs/plugin-react": "^6.1.2",
+    "jsdom": "^29.1.1",
+    "supertest": "^7.3.1",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "ioredis": "^6.0.0",
+    "pg": "^8.23.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}
