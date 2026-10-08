@@ -76,8 +76,13 @@ function parseArgs(argv) {
 
 // ---------- README + problem folders ----------
 
+// Git on Windows checks files out with CRLF line endings; keep whatever the file uses.
+const eolOf = (s) => (s.includes('\r\n') ? '\r\n' : '\n');
+
 function parseReadme() {
-  const lines = fs.readFileSync(README, 'utf8').split('\n');
+  const raw = fs.readFileSync(README, 'utf8');
+  const eol = eolOf(raw);
+  const lines = raw.split(/\r?\n/);
   const items = [];
   let sec = null;
   lines.forEach((line, i) => {
@@ -90,7 +95,7 @@ function parseReadme() {
       items.push({ i, sec, text, star: text.includes('⭐'), key: keyOf(text) });
     }
   });
-  return { lines, items };
+  return { lines, items, eol };
 }
 
 function loadProblems() {
@@ -229,11 +234,14 @@ function cmdLog(argv) {
   const notesFile = path.join(p.dir, 'NOTES.md');
   if (fs.existsSync(notesFile)) {
     const notes = fs.readFileSync(notesFile, 'utf8');
+    const nl = eolOf(notes);
     const row = `| ${n} | ${entry.date} | ${time} | ${icon} ${a.result} | ${esc(missed)} |`;
-    fs.writeFileSync(notesFile, notes.includes('<!-- attempts -->') ? notes.replace('<!-- attempts -->', `${row}\n<!-- attempts -->`) : `${notes}\n${row}\n`);
+    fs.writeFileSync(notesFile, notes.includes('<!-- attempts -->') ? notes.replace('<!-- attempts -->', `${row}${nl}<!-- attempts -->`) : `${notes}${nl}${row}${nl}`);
   }
   if (!fs.existsSync(PROGRESS)) fs.writeFileSync(PROGRESS, '# Progress log\n\n| Date | Problem | Attempt | Time | Result | Missed |\n|---|---|---|---|---|---|\n');
-  fs.appendFileSync(PROGRESS, `| ${entry.date} | [${p.rel}](${p.rel}) | ${n} | ${time} | ${icon} ${a.result} | ${esc(missed)} |\n`);
+  const prog = fs.readFileSync(PROGRESS, 'utf8');
+  const pnl = eolOf(prog);
+  fs.appendFileSync(PROGRESS, `${prog.endsWith('\n') ? '' : pnl}| ${entry.date} | [${p.rel}](${p.rel}) | ${n} | ${time} | ${icon} ${a.result} | ${esc(missed)} |${pnl}`);
 
   sync(true);
   const slug = path.basename(p.dir);
@@ -308,7 +316,7 @@ const bar = (done, total) => {
 };
 
 function sync(quiet = false) {
-  const { lines, items } = parseReadme();
+  const { lines, items, eol } = parseReadme();
   const probs = loadProblems();
   const byKey = new Map(probs.map((p) => [p.meta.key, p]));
 
@@ -356,7 +364,7 @@ function sync(quiet = false) {
     `![Mastered](https://img.shields.io/badge/mastered-${all.mastered}%2F${all.total}-brightgreen)`,
   ]);
 
-  const next = lines.join('\n');
+  const next = lines.join(eol);
   if (next !== fs.readFileSync(README, 'utf8')) {
     fs.writeFileSync(README, next);
     if (!quiet) console.log(`✔ README.md synced — ${all.started} started, ${all.mastered}/${all.total} mastered.`);
