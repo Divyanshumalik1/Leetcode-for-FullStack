@@ -1,0 +1,19 @@
+{
+  "question": "Build an LRU cache",
+  "key": "build an lru cache",
+  "section": 26,
+  "kind": "util",
+  "slug": "lru-cache",
+  "module": "lru_cache",
+  "created": "2026-10-13",
+  "langs": {
+    "ts": {
+      "dir": "ts",
+      "attempts": []
+    },
+    "py": {
+      "dir": "py",
+      "attempts": []
+    }
+  }
+}
