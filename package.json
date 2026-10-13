@@ -8,6 +8,7 @@
   },
   "scripts": {
     "new": "node scripts/fl.mjs new",
+    "add-lang": "node scripts/fl.mjs add-lang",
     "t": "node scripts/fl.mjs test",
     "play": "node scripts/fl.mjs play",
     "log": "node scripts/fl.mjs log",
@@ -15,6 +16,7 @@
     "today": "node scripts/fl.mjs today",
     "sync": "node scripts/fl.mjs sync",
     "test": "vitest run",
+    "test:py": "python -m pytest -q",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down"
   },
@@ -22,9 +24,16 @@
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.7",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/supertest": "^7.2.1",
     "@vitejs/plugin-react": "^6.1.2",
     "jsdom": "^29.1.1",
     "supertest": "^7.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
     "vite": "^8.3.4",
     "vitest": "^5.0.3"
   },

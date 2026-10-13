@@ -2,15 +2,23 @@
   "question": "Implement `map`",
   "key": "implement map",
   "section": 3,
-  "type": "js",
+  "kind": "util",
+  "slug": "map",
+  "module": "map",
   "created": "2026-10-08",
-  "attempts": [
-    {
-      "n": 1,
-      "date": "2026-10-08",
-      "minutes": 18,
-      "result": "partial",
-      "missed": "forgot holes; used this.length inside the loop"
+  "legacy": true,
+  "langs": {
+    "ts": {
+      "dir": ".",
+      "attempts": [
+        {
+          "n": 1,
+          "date": "2026-10-08",
+          "minutes": 18,
+          "result": "partial",
+          "missed": "forgot holes; used this.length inside the loop"
+        }
+      ]
     }
-  ]
+  }
 }

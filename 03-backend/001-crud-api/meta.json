@@ -1,0 +1,16 @@
+{
+  "question": "CRUD API",
+  "key": "crud api",
+  "section": 9,
+  "kind": "backend",
+  "slug": "crud-api",
+  "module": "crud_api",
+  "created": "2026-10-08",
+  "legacy": true,
+  "langs": {
+    "ts": {
+      "dir": ".",
+      "attempts": []
+    }
+  }
+}

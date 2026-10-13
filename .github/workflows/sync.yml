@@ -41,3 +41,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx vitest run
+      - uses: actions/setup-python@v5
+        if: always()
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+        if: always()
+      - run: python -m pytest -q || test $? -eq 5   # exit 5 = no tests yet
+        if: always()
